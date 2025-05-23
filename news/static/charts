@@ -1,0 +1,20 @@
+
+import matplotlib.pyplot as plt
+
+# Define entity counts (replace these with model.objects.count() in production)
+data = {
+    "Articles": 142,
+    "Categories": 12,
+    "Channels": 2,
+    "Locations": 9,
+    "Reporters": 5
+}
+
+for label, count in data.items():
+    plt.figure(figsize=(4, 4))
+    plt.bar([label], [count], color='teal')
+    plt.title(f"{label} Overview")
+    plt.ylabel("Count")
+    plt.tight_layout()
+    plt.savefig(f"static/charts/{label.lower()}_chart.png")  # save each chart separately
+    plt.close()

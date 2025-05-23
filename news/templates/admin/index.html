@@ -1,0 +1,38 @@
+{% extends "admin/index.html" %}
+{% load static %}
+
+{% block content %}
+  {{ block.super }}
+
+  <div class="card" style="margin-top: 40px;">
+    <div class="card-header">
+      <h2 class="card-title">📊 Article Count by Category</h2>
+    </div>
+    <div class="card-body">
+      <canvas id="articleChart" height="100"></canvas>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('articleChart');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: {{ labels|safe }},
+        datasets: [{
+          label: 'Articles',
+          data: {{ data|safe }},
+          backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+{% endblock %}
